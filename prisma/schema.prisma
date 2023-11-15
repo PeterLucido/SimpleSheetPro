@@ -58,10 +58,49 @@ model User {
     email         String?   @unique
     emailVerified DateTime?
     image         String?
+    role          UserRole  @default(USER)
     accounts      Account[]
     sessions      Session[]
     posts         Post[]
+    coach         Coach?
+    diver         Diver?
 }
+
+enum UserRole {
+    USER
+    COACH
+    DIVER
+}
+
+model Coach {
+    id        String   @id
+    bio       String
+    expertise String
+    userId    String   @unique
+    user      User     @relation(fields: [userId], references: [id])
+}
+
+enum Grade {
+    Freshman
+    Sophomore
+    Junior
+    Senior
+}
+
+enum Gender {
+    MALE
+    FEMALE
+}
+
+
+model Diver {
+    id           String   @id
+    grade        Grade
+    gender       Gender
+    userId       String   @unique
+    user         User     @relation(fields: [userId], references: [id])
+}
+
 
 model VerificationToken {
     identifier String
