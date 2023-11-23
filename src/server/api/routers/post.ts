@@ -35,7 +35,20 @@ export const postRouter = createTRPCRouter({
       where: { createdBy: { id: ctx.session.user.id } },
     });
   }),
-
+  getAll: protectedProcedure.query(async ({ ctx }) => {
+    return ctx.db.post.findMany({
+      orderBy: { createdAt: 'desc' },
+      include: { createdBy: true },
+    });
+  }),
+  getOneId: protectedProcedure
+  .input(z.object({ id: z.number() }))
+  .query(async ({ ctx, input }) => {
+    return ctx.db.post.findUnique({
+      where: { id: input.id },
+      include: { createdBy: true }, 
+    });
+  }),
   getSecretMessage: protectedProcedure.query(() => {
     return "you can now see this secret message!";
   }),

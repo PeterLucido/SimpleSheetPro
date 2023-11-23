@@ -18,7 +18,7 @@ export default async function Home() {
 
           <div className="flex flex-col items-center justify-center gap-4">
             <p className="text-center text-2xl text-white">
-              {session && <span>Logged in as {session.user?.name}</span>}
+              {session && <span>{session.user?.name}</span>}
             </p>
             <Link
               href={session ? "/api/auth/signout" : "/api/auth/signin"}
@@ -39,12 +39,20 @@ async function CrudShowcase() {
   const session = await getServerAuthSession();
   if (!session?.user) return null;
 
-  const latestPost = await api.post.getLatest.query();
+
+  const allPosts = await api.post.getAll.query();
 
   return (
     <div className="w-full max-w-xs">
-      {latestPost ? (
-        <p className="truncate">Your most recent post: {latestPost.name}</p>
+      {allPosts && allPosts.length > 0 ? (
+        <div>
+          <h2>Your Posts:</h2>
+          {allPosts.map(post => (
+            <Link href={`/post/${post.id}`} key={post.id}>
+              <h1 className="block truncate hover:underline">{post.name}</h1>
+            </Link>
+          ))}
+        </div>
       ) : (
         <p>You have no posts yet.</p>
       )}
@@ -53,3 +61,4 @@ async function CrudShowcase() {
     </div>
   );
 }
+
