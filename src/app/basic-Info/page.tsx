@@ -15,8 +15,8 @@ const BasicInfo = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-4 bg-white rounded-lg shadow-lg">
-      {/* <h1 className="text-2xl font-bold mb-4">Hello, UserName</h1> */}
+    <div className="flex justify-center items-center h-screen bg-blue-400">
+    <div className="w-full max-w-md mx-auto p-4 bg-white rounded-xl shadow-lg">
       <form>
         <div className="space-y-4">
           <div className="w-full">
@@ -58,17 +58,37 @@ const BasicInfo = () => {
               </div>
             </>
           )}
+          {formData.role === "Coach" && (
+            <>
+              <div className="w-full">
+                <SelectGroup
+                  label="Schools"
+                  options={[
+                    { value: "Blah", label: "Blah" },
+                    { value: "Blah1", label: "Blah1" },
+                    { value: "Blah2", label: "Blah2" },
+                    { value: "Blah3", label: "Blah3" },
+                    { value: "Blah4", label: "Blah4" },
+                    { value: "Blah5", label: "Blah5" },
+                    { value: "Blah6", label: "Blah6" },
+                  ]}
+                  name="Gender"
+                />
+              </div>
+            </>
+          )}
 
           <div className="w-full">
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white rounded-full py-2 px-4 hover:bg-blue-600"
+              className="w-full bg-blue-400 text-white rounded-full py-2 px-4 hover:bg-blue-600"
             >
               Submit
             </button>
           </div>
         </div>
       </form>
+    </div>
     </div>
   );
 };
