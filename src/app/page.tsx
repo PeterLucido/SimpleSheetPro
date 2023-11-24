@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { CreatePost } from "~/app/_components/create-post";
+// import { CreatePost } from "~/app/_components/create-post";
 import { getServerAuthSession } from "~/server/auth";
 import { api } from "~/trpc/server";
 
@@ -29,36 +29,37 @@ export default async function Home() {
           </div>
         </div>
 
-        <CrudShowcase />
+        {/* <CrudShowcase /> */}
       </div>
     </main>
   );
 }
 
-async function CrudShowcase() {
-  const session = await getServerAuthSession();
-  if (!session?.user) return null;
+// async function CrudShowcase() {
+//   // const session = await getServerAuthSession();
+//   // if (!session?.user) return null;
 
 
-  const allPosts = await api.post.getAll.query();
+//   // const allPosts = await api.post.getAll.query();
 
-  return (
-    <div className="w-full max-w-xs">
-      {allPosts && allPosts.length > 0 ? (
-        <div>
-          <h2>Your Posts:</h2>
-          {allPosts.map(post => (
-            <Link href={`/post/${post.id}`} key={post.id}>
-              <h1 className="block truncate hover:underline">{post.name}</h1>
-            </Link>
-          ))}
-        </div>
-      ) : (
-        <p>You have no posts yet.</p>
-      )}
+//   return (
+//     <div className="w-full max-w-xs">
+//       <h1 className="text-2xl font-semibold">Your Posts</h1>
+//       {/* {allPosts && allPosts.length > 0 ? (
+//         <div>
+//           <h2>Your Posts:</h2>
+//           {allPosts.map(post => (
+//             <Link href={`/post/${post.id}`} key={post.id}>
+//               <h1 className="block truncate hover:underline">{post.name}</h1>
+//             </Link>
+//           ))}
+//         </div>
+//       ) : (
+//         <p>You have no posts yet.</p>
+//       )}
 
-      <CreatePost />
-    </div>
-  );
-}
+//       <CreatePost /> */}
+//     </div>
+//   );
+// }
 
